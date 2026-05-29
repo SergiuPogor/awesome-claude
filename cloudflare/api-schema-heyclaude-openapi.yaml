@@ -8276,9 +8276,10 @@ paths:
                   maxLength: 64
                   default: ""
                 expiresAt:
-                  type: string
-                  maxLength: 64
-                  default: ""
+                  anyOf:
+                    - type: string
+                      maxLength: 64
+                    - type: "null"
               required:
                 - slug
                 - action
