@@ -1,12 +1,18 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  hasEmbeddedUrlUserinfo,
   isPublicGitHubProfileUrl,
   isPublicHttpsUrl,
   publicUrlHostname,
 } from "../packages/mcp/src/public-url-lib.js";
 
 describe("MCP public URL helpers", () => {
+  it("detects embedded userinfo credentials", () => {
+    expect(hasEmbeddedUrlUserinfo("https://token@example.com/docs")).toBe(true);
+    expect(hasEmbeddedUrlUserinfo("https://example.com/docs")).toBe(false);
+  });
+
   it("validates public https URLs without userinfo", () => {
     expect(isPublicHttpsUrl("")).toBe(true);
     expect(isPublicHttpsUrl("https://example.com/docs")).toBe(true);
