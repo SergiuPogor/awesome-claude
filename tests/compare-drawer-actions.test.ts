@@ -7,6 +7,7 @@ import {
   compareDrawerActionsDiverge,
   compareDrawerSharedActionIds,
 } from "@/lib/compare-drawer-actions";
+import { compareSurfaceActionSummary } from "@/lib/compare-surface-actions-lib";
 
 function entry(overrides: Partial<Entry> = {}): Entry {
   return {
@@ -104,5 +105,8 @@ describe("compare drawer actions", () => {
       sharedActionIds: ["dossier", "claim"],
       uniqueSignatures: 2,
     });
+    expect(compareDrawerActionSummary([baseline, withInstall])).toEqual(
+      compareSurfaceActionSummary([baseline, withInstall]),
+    );
   });
 });
